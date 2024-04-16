@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grisC">#ababab</color>
+    <color name="grisMEP">#404040</color>
+    <color name="naranjaMEPC">#ffbb25</color>
+    <color name="naranjaMEP">#c4901d</color>
+    <color name="naranjaOMEP">#62480e</color>
 </resources>
