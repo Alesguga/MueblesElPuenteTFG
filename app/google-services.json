@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "2350732416",
+    "project_id": "loginmep-c4c56",
+    "storage_bucket": "loginmep-c4c56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2350732416:android:ae4766f21fa3dc14dac265",
+        "android_client_info": {
+          "package_name": "net.azarquiel.logintfg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDePbuIUo-wV4yNE6t3ruayLXblV_D0HsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2350732416:android:e47b10afa365445adac265",
+        "android_client_info": {
+          "package_name": "net.azarquiel.muebleselpuentetfgloginfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDePbuIUo-wV4yNE6t3ruayLXblV_D0HsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
