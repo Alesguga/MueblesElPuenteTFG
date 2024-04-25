@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "net.azarquiel.logintfg"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -60,11 +60,15 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.material3:material3:1.3.0-alpha05")
+    implementation("androidx.wear.compose:compose-material:1.3.1")
     testImplementation("junit:junit:4.13.2")
     //Preview y tooling
     implementation ("androidx.compose.ui:ui-tooling-preview:1.6.6")
     implementation ("androidx.compose.ui:ui-tooling:1.6.6")
+    //Firebase Auth
+    implementation("com.google.firebase:firebase-auth:22.3.1")
 
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

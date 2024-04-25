@@ -22,7 +22,17 @@ val AppTypography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.65.sp
+    ),
+)
+    val AppTypographyB = androidx.wear.compose.material.Typography(
+        button = TextStyle(
+            fontFamily = CustomFontFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 17.sp,
+            color = naranjaMEPC
+        ),
     )
+
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -39,4 +49,3 @@ val AppTypography = Typography(
         letterSpacing = 0.5.sp
     )
     */
-)
