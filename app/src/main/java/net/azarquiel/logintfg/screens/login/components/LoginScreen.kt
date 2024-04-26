@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,9 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -43,10 +40,8 @@ import androidx.compose.ui.unit.sp
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.performLogin
 import net.azarquiel.logintfg.ui.theme.AppTypography
-import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.grisO
-import net.azarquiel.logintfg.ui.theme.naranjaMEP
 import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
@@ -56,6 +51,7 @@ fun MueblesElPuenteAppTFGTheme(content: @Composable () -> Unit) {
         content = content
     )
 }
+
 @Composable
 fun LoginContent() {
     val context = LocalContext.current
@@ -123,6 +119,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             label = { Text("Contraseña") },
             visualTransformation = if (password.isNotEmpty()) PasswordVisualTransformation() else VisualTransformation.None,
             keyboardOptions = KeyboardOptions.Default.copy(autoCorrect = false),
+
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
                 focusedContainerColor = grisCC,
@@ -133,18 +130,20 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
                 focusedLeadingIconColor = naranjaMEPC,
                 focusedPlaceholderColor = naranjaMEPC,
                 cursorColor = naranjaMEPC
-                ),
+            ),
             shape = RoundedCornerShape(10.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = { onLogin(email, password) },
+
             modifier = Modifier
                 .width(250.dp)
                 .height(50.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White
+                containerColor = Color.White,
             ),
+
             shape = RoundedCornerShape(10.dp)
 
         ) {
