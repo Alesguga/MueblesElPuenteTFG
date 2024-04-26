@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.components.LoginContent
@@ -40,6 +41,7 @@ import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             MueblesElPuenteAppTFGTheme {
                 LoginContent()
