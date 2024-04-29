@@ -24,11 +24,11 @@ val AppTypography = Typography(
         letterSpacing = 0.65.sp
     ),
 )
-    val AppTypographyB = androidx.wear.compose.material.Typography(
-        button = TextStyle(
+    val AppTypographyB = Typography(
+        bodyLarge = TextStyle(
             fontFamily = CustomFontFamily,
             fontWeight = FontWeight.Normal,
-            fontSize = 17.sp,
+            fontSize = 25.sp,
             color = naranjaMEPC
         ),
     )

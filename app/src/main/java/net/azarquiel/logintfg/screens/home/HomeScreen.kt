@@ -3,8 +3,7 @@ package net.azarquiel.logintfg.screens.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,20 +12,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.azarquiel.logintfg.R
-import net.azarquiel.logintfg.ui.theme.LoginTFGTheme
+import net.azarquiel.logintfg.screens.home.components.Card1
+import net.azarquiel.logintfg.screens.home.components.Card2
+import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisO
 
 @Composable
 fun HomeScreen() {
-    LoginTFGTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier
-                .fillMaxSize(),
-
-        ) {
+    MueblesElPuenteAppTFGTheme {
             HomeContent()
-        }
     }
 }
 
@@ -36,33 +30,28 @@ fun HomeContent() {
         modifier = Modifier
             .fillMaxSize()
             .background(grisO)
-            .padding(16.dp),
+            .padding(40.dp, 30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     ) {
         Image(
             painter = painterResource(id = R.drawable.logomep),
             contentDescription = "Logo de Muebles El Puente",
             modifier = Modifier.size(150.dp)
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        Greeting(name = "¡Bienvenido a Muebles El Puente!")
+        Spacer(modifier = Modifier.height(18.dp))
+        Card1()
+        Card2()
+
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(
-        text = name,
-        style = MaterialTheme.typography.headlineMedium,
-        modifier = Modifier.padding(16.dp)
-    )
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    LoginTFGTheme {
+    MueblesElPuenteAppTFGTheme {
         HomeScreen()
     }
 }
