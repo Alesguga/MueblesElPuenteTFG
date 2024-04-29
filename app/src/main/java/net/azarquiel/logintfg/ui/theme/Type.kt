@@ -20,12 +20,11 @@ val AppTypography = Typography(
         fontFamily = CustomFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        lineHeight = 24.sp,
         letterSpacing = 0.65.sp
     ),
 )
     val AppTypographyB = Typography(
-        bodyLarge = TextStyle(
+        bodyMedium = TextStyle(
             fontFamily = CustomFontFamily,
             fontWeight = FontWeight.Normal,
             fontSize = 25.sp,

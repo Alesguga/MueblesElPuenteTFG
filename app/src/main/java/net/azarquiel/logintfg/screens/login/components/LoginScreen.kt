@@ -41,6 +41,7 @@ import androidx.navigation.NavController
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.performLogin
 import net.azarquiel.logintfg.ui.theme.AppTypography
+import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.grisO
 import net.azarquiel.logintfg.ui.theme.naranjaMEPC
@@ -143,13 +144,20 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
                 .width(250.dp)
                 .height(50.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White,
+                containerColor = (grisC),
+                disabledContainerColor = Color.White
             ),
 
             shape = RoundedCornerShape(10.dp)
 
         ) {
-            Text("Login",fontSize = 17.sp, color = Color.Black)
+            Text(
+                "Login",
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = Color.White
+                )
+            )
+
         }
 
     }
