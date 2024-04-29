@@ -23,14 +23,8 @@ val AppTypography = Typography(
         letterSpacing = 0.65.sp
     ),
 )
-    val AppTypographyB = Typography(
-        bodyMedium = TextStyle(
-            fontFamily = CustomFontFamily,
-            fontWeight = FontWeight.Normal,
-            fontSize = 25.sp,
-            color = naranjaMEPC
-        ),
-    )
+
+
 
     /* Other default text styles to override
     titleLarge = TextStyle(

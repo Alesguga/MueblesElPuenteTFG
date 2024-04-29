@@ -74,7 +74,7 @@ fun Card2(){
 
 @Preview(showBackground = true)
 @Composable
-fun previewCard2(){
+fun PreviewCard2(){
     MueblesElPuenteAppTFGTheme {
         Card2()
     }

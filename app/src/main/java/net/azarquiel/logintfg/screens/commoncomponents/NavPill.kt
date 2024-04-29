@@ -59,7 +59,7 @@ fun NavPill(screenName : String, modifier: Modifier = Modifier){
 
 @Preview(showBackground = false)
 @Composable
-fun previewNav(){
+fun PreviewNav(){
     MueblesElPuenteAppTFGTheme {
         NavPill("Albaranes de envio")
     }
