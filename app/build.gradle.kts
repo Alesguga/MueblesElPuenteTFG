@@ -73,6 +73,14 @@ dependencies {
     implementation ("androidx.core:core-splashscreen:1.0.1")
     //Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    // retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    //GSON
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    //Coil
+    implementation ("io.coil-kt:coil-compose:2.4.0")
+    //Picasso
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

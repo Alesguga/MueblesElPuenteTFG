@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.performLogin
 import net.azarquiel.logintfg.ui.theme.AppTypography
@@ -53,12 +54,13 @@ fun MueblesElPuenteAppTFGTheme(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun LoginContent() {
+fun LoginContent(navController: NavController) {
     val context = LocalContext.current
     LoginScreen(onLogin = { email, password ->
-        performLogin(email, password, context)
+        performLogin(email, password, context, navController)
     })
 }
+
 //Diseño de la pagina del login
 @Composable
 fun LoginScreen(onLogin: (String, String) -> Unit) {

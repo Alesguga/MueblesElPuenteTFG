@@ -8,6 +8,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import net.azarquiel.logintfg.navigation.AppNavigation
 import net.azarquiel.logintfg.screens.login.components.LoginContent
@@ -21,26 +22,28 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             MueblesElPuenteAppTFGTheme {
-                LoginContent()
                 AppNavigation()
             }
         }
     }
 }
-fun performLogin(email: String, password: String, context: Context) {
+
+fun performLogin(email: String, password: String, context: Context, navController: NavController) {
     if (email.isNotBlank() && password.isNotBlank()) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(context, "Login completado!", Toast.LENGTH_SHORT).show()
+                    navController.navigate("home")
                 } else {
                     Toast.makeText(context, "Login fallido: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     } else {
-        Toast.makeText(context, "Porfavor introduce un gmail y una contraseña.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Por favor introduce un correo electrónico y una contraseña.", Toast.LENGTH_SHORT).show()
     }
 }
+
 
 //Para ver los cambios antes de ejecutar
 @Preview(showBackground = true, name = "Login Screen Preview entera")

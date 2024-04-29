@@ -5,16 +5,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import net.azarquiel.logintfg.screens.home.HomeScreen
-import net.azarquiel.logintfg.screens.login.MainActivity
+import net.azarquiel.logintfg.screens.login.components.LoginContent
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "login"){
-        composable("login"){
-            MainActivity()
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") {
+            LoginContent(navController)
         }
-        composable("home"){
+        composable("home") {
             HomeScreen()
         }
     }
