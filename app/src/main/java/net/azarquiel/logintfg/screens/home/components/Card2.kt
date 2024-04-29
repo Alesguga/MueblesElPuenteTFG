@@ -61,10 +61,11 @@ fun Card2(){
                 .padding(25.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.dorhome),
+                painter = painterResource(id = R.drawable.dorhome1),
                 contentDescription = "Logomep",
                 modifier = Modifier
                     .clip(RoundedCornerShape(6.dp))
+                    .fillMaxWidth()
             )
 
         }
