@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.azarquiel.logintfg.R
+import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.home.components.Card1
 import net.azarquiel.logintfg.screens.home.components.Card2
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme

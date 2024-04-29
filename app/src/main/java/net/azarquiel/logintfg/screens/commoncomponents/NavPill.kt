@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,14 +32,14 @@ fun NavPill(screenName : String, modifier: Modifier = Modifier){
         modifier = modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 2.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
-        shape = RoundedCornerShape(50) // Dar una forma redondeada
+        shape = RoundedCornerShape(50)
     ) {
         Row(
             modifier = Modifier
-                .background(grisC) // Fondo semi transparente
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .background(grisC)
+                .padding(horizontal = 80.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
@@ -46,11 +47,11 @@ fun NavPill(screenName : String, modifier: Modifier = Modifier){
                 painter = painterResource(id = R.drawable.logomep),
                 contentDescription = "albaranes",
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(50.dp))
             Text(
                 text = screenName,
                 style = MaterialTheme.typography.bodyLarge.copy(textAlign = TextAlign.Center),
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = Color.White
             )
         }
     }
@@ -60,6 +61,6 @@ fun NavPill(screenName : String, modifier: Modifier = Modifier){
 @Composable
 fun previewNav(){
     MueblesElPuenteAppTFGTheme {
-        NavPill("holamundo")
+        NavPill("Albaranes de envio")
     }
 }
