@@ -30,7 +30,7 @@ fun HomeContent() {
         modifier = Modifier
             .fillMaxSize()
             .background(grisO)
-            .padding(40.dp, 30.dp),
+            .padding(10.dp, 35.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
