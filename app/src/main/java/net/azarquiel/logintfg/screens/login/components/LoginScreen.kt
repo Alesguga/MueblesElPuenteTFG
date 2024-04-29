@@ -105,7 +105,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
                 cursorColor = naranjaMEPC
             ),
             shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrect = false),
+            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled = false),
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -120,7 +120,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             },
             label = { Text("Contraseña") },
             visualTransformation = if (password.isNotEmpty()) PasswordVisualTransformation() else VisualTransformation.None,
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrect = false),
+            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled = false),
 
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
