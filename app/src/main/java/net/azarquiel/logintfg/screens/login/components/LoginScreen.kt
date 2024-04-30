@@ -40,11 +40,9 @@ import androidx.navigation.NavController
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.performLogin
 import net.azarquiel.logintfg.ui.theme.AppTypography
-import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.grisO
 import net.azarquiel.logintfg.ui.theme.naranjaMEP
-import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
 fun MueblesElPuenteAppTFGTheme(content: @Composable () -> Unit) {

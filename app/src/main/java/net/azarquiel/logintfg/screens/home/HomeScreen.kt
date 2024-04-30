@@ -16,7 +16,6 @@ import net.azarquiel.logintfg.screens.home.components.Card1
 import net.azarquiel.logintfg.screens.home.components.Card2
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisCC
-import net.azarquiel.logintfg.ui.theme.grisO
 
 @Composable
 fun HomeScreen(navController: NavController) {
