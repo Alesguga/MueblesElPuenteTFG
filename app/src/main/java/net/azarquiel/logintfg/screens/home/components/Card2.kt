@@ -24,6 +24,8 @@ import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
+import net.azarquiel.logintfg.ui.theme.naranjaMEP
+import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
 fun Card2(){
@@ -37,7 +39,7 @@ fun Card2(){
         colors = CardDefaults.cardColors(
             containerColor = grisC,
             disabledContainerColor = grisCC,
-            contentColor = Color.White
+            contentColor = naranjaMEPC
 
         )
     ){

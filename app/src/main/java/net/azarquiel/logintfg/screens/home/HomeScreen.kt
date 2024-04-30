@@ -13,6 +13,7 @@ import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.home.components.Card1
 import net.azarquiel.logintfg.screens.home.components.Card2
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
+import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.grisO
 
 @Composable
@@ -27,7 +28,7 @@ fun HomeContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(grisO)
+            .background(grisCC)
             .padding(10.dp, 35.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -35,7 +36,7 @@ fun HomeContent() {
         Image(
             painter = painterResource(id = R.drawable.logomep),
             contentDescription = "Logo de Muebles El Puente",
-            modifier = Modifier.size(150.dp)
+            modifier = Modifier.size(160.dp)
         )
         Spacer(modifier = Modifier.height(18.dp))
         Card1()

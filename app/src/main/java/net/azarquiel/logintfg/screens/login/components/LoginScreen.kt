@@ -43,6 +43,7 @@ import net.azarquiel.logintfg.ui.theme.AppTypography
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.grisO
+import net.azarquiel.logintfg.ui.theme.naranjaMEP
 import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
@@ -70,7 +71,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(grisO)
+            .background(grisCC)
             .padding(55.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -80,7 +81,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             painter = painterResource(id = R.drawable.logomep),
             contentDescription = "Logo app",
             modifier = Modifier
-                .size(160.dp)
+                .size(170.dp)
         )
         Spacer(modifier = Modifier.height(60.dp))
         TextField(
@@ -95,14 +96,15 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             },
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
-                focusedContainerColor = grisCC,
+                focusedContainerColor = Color.White,
                 unfocusedTextColor = Color.Black,
                 focusedTextColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEPC,
-                focusedLeadingIconColor = naranjaMEPC,
-                focusedPlaceholderColor = naranjaMEPC,
-                cursorColor = naranjaMEPC
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedLabelColor = naranjaMEP,
+                focusedLeadingIconColor = naranjaMEP,
+                focusedPlaceholderColor = naranjaMEP,
+                cursorColor = naranjaMEP
             ),
             shape = RoundedCornerShape(10.dp),
             keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled = false),
@@ -124,14 +126,15 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
 
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White,
-                focusedContainerColor = grisCC,
+                focusedContainerColor = Color.White,
                 unfocusedTextColor = Color.Black,
                 focusedTextColor = Color.Black,
                 focusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEPC,
-                focusedLeadingIconColor = naranjaMEPC,
-                focusedPlaceholderColor = naranjaMEPC,
-                cursorColor = naranjaMEPC
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedLabelColor = naranjaMEP,
+                focusedLeadingIconColor = naranjaMEP,
+                focusedPlaceholderColor = naranjaMEP,
+                cursorColor = naranjaMEP
             ),
             shape = RoundedCornerShape(10.dp)
         )
@@ -143,7 +146,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
                 .width(250.dp)
                 .height(50.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = (grisC),
+                containerColor = (grisO),
                 disabledContainerColor = Color.White
             ),
 

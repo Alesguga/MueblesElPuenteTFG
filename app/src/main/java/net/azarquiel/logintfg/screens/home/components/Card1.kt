@@ -24,6 +24,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
+import net.azarquiel.logintfg.ui.theme.naranjaMEP
+import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
 fun Card1(){
@@ -37,7 +39,7 @@ fun Card1(){
         colors = CardDefaults.cardColors(
             containerColor = grisC,
             disabledContainerColor = grisCC,
-            contentColor = Color.White
+            contentColor = naranjaMEPC
 
         )
     ){

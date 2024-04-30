@@ -17,6 +17,6 @@ val grisCC = Color(0xFFEEEEEE)
 val grisO = Color(0XFF404040)
 val grisC = Color(0xFFABABAB)
 val naranjaMEPC = Color(0xFFFFBB25)
-val naranjaMEP = Color(0xFFC4901D)
+val naranjaMEP = Color(0xFFd47907)
 val naranjaOMEP = Color(0xFF62480e)
 

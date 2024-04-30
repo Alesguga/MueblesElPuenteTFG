@@ -20,7 +20,7 @@ val AppTypography = Typography(
         fontFamily = CustomFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        letterSpacing = 0.65.sp
+        letterSpacing = 0.85.sp
     ),
 )
 
