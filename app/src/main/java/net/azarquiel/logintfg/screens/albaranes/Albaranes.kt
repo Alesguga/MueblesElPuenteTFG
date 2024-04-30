@@ -13,5 +13,4 @@ fun Albaranes (){
 @Composable
 fun AlbaranesContent() {
 
-    
 }

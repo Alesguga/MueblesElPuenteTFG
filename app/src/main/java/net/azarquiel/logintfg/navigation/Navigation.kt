@@ -16,10 +16,11 @@ fun AppNavigation() {
             LoginContent(navController)
         }
         composable("home") {
-            HomeScreen()
+            HomeScreen(navController)
         }
-        composable("albaranes"){
+        composable("albaranes") {
             Albaranes()
         }
     }
 }
+

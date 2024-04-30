@@ -21,18 +21,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.naranjaMEP
 import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
-fun Card1(){
+fun Card1(navController: NavController){
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .clickable { }
+            .clickable { navController.navigate("albaranes") }
             .fillMaxWidth(),
 
         shape = RoundedCornerShape(15.dp),
@@ -78,6 +81,6 @@ fun Card1(){
 @Composable
 fun PreviewCard1(){
     MueblesElPuenteAppTFGTheme {
-        Card1()
+        Card1(navController = NavController(context = LocalContext.current))
     }
 }
