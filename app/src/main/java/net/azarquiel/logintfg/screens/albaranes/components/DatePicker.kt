@@ -64,7 +64,13 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                             .background(if (dia.esOcupado) Color.Red else Color.Transparent)
                             .clickable { onDiaSeleccionado(dia.fecha) }
                     ) {
-                        Text(text = dia.fecha.dayOfMonth.toString())
+                        Text(text = dia.fecha.dayOfMonth.toString(),
+                            modifier = Modifier
+                                .padding(5.dp)
+                                .background(if (dia.esOcupado) Color.Red else Color.Transparent),
+                            textAlign = TextAlign.Center,
+
+                        )
                     }
                 }
             }
