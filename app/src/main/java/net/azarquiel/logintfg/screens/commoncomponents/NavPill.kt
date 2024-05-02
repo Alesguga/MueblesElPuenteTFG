@@ -35,9 +35,9 @@ fun NavPill(screenName : String, modifier: Modifier = Modifier){
         modifier = modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
-            .padding(horizontal = 5.dp, vertical = 12.dp),
+            .padding(horizontal = 10.dp, vertical = 12.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
-        shape = RoundedCornerShape(50)
+        shape = RoundedCornerShape(10.dp)
     ) {
         Row(
             modifier = Modifier

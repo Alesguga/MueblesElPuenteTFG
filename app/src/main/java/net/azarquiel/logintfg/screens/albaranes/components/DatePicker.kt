@@ -8,6 +8,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,30 +35,37 @@ data class DiaCalendario(val fecha: LocalDate, val esOcupado: Boolean)
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
-fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate> = listOf(LocalDate.now()), onDiaSeleccionado: (LocalDate) -> Unit = {}) {
+fun CalendarioMes(mes:YearMonth,diasOcupados: List<LocalDate> = listOf(LocalDate.now()), onDiaSeleccionado: (LocalDate) -> Unit = {}) {
+    var mes by remember { mutableStateOf(YearMonth.now()) }
     val diasDelMes = remember(mes) { mes.atDay(1).datesUntil(mes.plusMonths(1).atDay(1)).toList() }
     val diasConEstado = diasDelMes.map { fecha ->
         DiaCalendario(fecha, diasOcupados.contains(fecha))
     }
-        Column(modifier = Modifier
-            .padding(8.dp ,80.dp, 8.dp, 8.dp)
-            .clip(RoundedCornerShape(10.dp))
-            .background(grisC)
+    Column(modifier = Modifier
+        .padding(8.dp ,80.dp, 8.dp, 8.dp)
+        .clip(RoundedCornerShape(10.dp))
+        .background(grisC)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .align(Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            IconButton(onClick = { mes = mes.minusMonths(1) }) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Mes anterior")
+            }
             Text(
-                text = "${
-                    mes.month.getDisplayName(
-                        TextStyle.FULL,
-                        Locale.getDefault()
-                    )
-                } ${mes.year}",
+                text = "${mes.month.getDisplayName(TextStyle.FULL, Locale.getDefault())} ${mes.year}",
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 25.sp,
-                modifier = Modifier
-                    .padding(12.dp)
-                    .align(Alignment.CenterHorizontally),
                 color = grisO
             )
+            IconButton(onClick = { mes = mes.plusMonths(1) }) {
+                Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Mes siguiente")
+            }
+        }
 
             // Días de la semana
             Row(modifier = Modifier.fillMaxWidth()) {
@@ -65,7 +75,7 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                             .padding(8.dp)
                             .weight(1f),
                         textAlign = TextAlign.Center,
-                        color = grisCC
+                        color = grisO
                     )
                 }
             }
@@ -109,6 +119,6 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
 @Composable
 fun PreviewDatePicker() {
     MueblesElPuenteAppTFGTheme {
-        CalendarioMes()
+        CalendarioMes(mes = YearMonth.now())
     }
 }

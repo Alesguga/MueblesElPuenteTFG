@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +24,6 @@ import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
-import net.azarquiel.logintfg.ui.theme.naranjaMEPC
 
 @Composable
 fun Card2(){
@@ -37,7 +37,7 @@ fun Card2(){
         colors = CardDefaults.cardColors(
             containerColor = grisC,
             disabledContainerColor = grisCC,
-            contentColor = naranjaMEPC
+            contentColor = Color.White
 
         )
     ){
