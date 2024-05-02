@@ -81,6 +81,7 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(4.dp)
+                                .clip(RoundedCornerShape(4.dp))
                                 .border(BorderStroke(1.dp, grisC), RoundedCornerShape(4.dp))
                                 .background(if (dia.esOcupado) naranjaMEP else Color.Transparent)
                                 .clickable { onDiaSeleccionado(dia.fecha) }
