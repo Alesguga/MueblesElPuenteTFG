@@ -30,16 +30,12 @@ import net.azarquiel.logintfg.ui.theme.grisO
 
 @Composable
 fun NavPill(screenName : String, modifier: Modifier = Modifier){
-    Spacer(modifier = Modifier
-        .padding(0.dp, 20.dp, 0.dp,0.dp)
-        .fillMaxWidth()
-        .height(10.dp)
-    )
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
-            .padding(horizontal = 16.dp, vertical = 2.dp),
+            .padding(horizontal = 5.dp, vertical = 12.dp),
         color = MaterialTheme.colorScheme.primaryContainer,
         shape = RoundedCornerShape(50)
     ) {

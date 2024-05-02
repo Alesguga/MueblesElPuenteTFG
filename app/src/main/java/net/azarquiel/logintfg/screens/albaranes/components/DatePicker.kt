@@ -52,7 +52,7 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 25.sp,
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(12.dp)
                     .align(Alignment.CenterHorizontally),
                 color = grisO
             )
@@ -91,7 +91,7 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                                     .padding(6.dp)
                                     .background(if (dia.esOcupado) naranjaMEP else Color.Transparent),
                                 textAlign = TextAlign.Center,
-                                color = if (dia.esOcupado) Color.White else grisCC
+                                color = if (dia.esOcupado) grisO else Color.White
                             )
                             Spacer(modifier = Modifier.padding(20.dp))
                         }
