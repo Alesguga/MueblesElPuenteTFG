@@ -59,6 +59,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.compose.material:material")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.material3:material3:1.3.0-alpha05")
@@ -71,6 +73,8 @@ dependencies {
     implementation ("androidx.compose.ui:ui-tooling:1.6.6")
     //Firebase Auth
     implementation("com.google.firebase:firebase-auth:22.3.1")
+    //Firebase Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx:24.11.1")
     //Splash Api
     implementation ("androidx.core:core-splashscreen:1.0.1")
     //Navigation Compose
