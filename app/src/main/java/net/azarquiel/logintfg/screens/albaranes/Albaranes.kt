@@ -32,7 +32,7 @@ fun Albaranes() {
 @Composable
 fun AlbaranesContent() {
     val db = Firebase.firestore
-    var fechaSeleccionada by remember { mutableStateOf(LocalDate.now()) }
+    val fechaSeleccionada by remember { mutableStateOf(LocalDate.now()) }
     val diasOcupados = remember { mutableStateListOf<LocalDate>() }
 
     // Cargar días ocupados al iniciar
