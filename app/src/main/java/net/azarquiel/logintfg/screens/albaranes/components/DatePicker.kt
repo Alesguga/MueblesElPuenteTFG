@@ -37,11 +37,10 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
     val diasConEstado = diasDelMes.map { fecha ->
         DiaCalendario(fecha, diasOcupados.contains(fecha))
     }
-
         Column(modifier = Modifier
-            .padding(8.dp)
+            .padding(8.dp ,80.dp, 8.dp, 8.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(grisO)
+            .background(grisC)
         ) {
             Text(
                 text = "${
@@ -55,7 +54,7 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                 modifier = Modifier
                     .padding(8.dp)
                     .align(Alignment.CenterHorizontally),
-                color = naranjaMEP
+                color = grisO
             )
 
             // Días de la semana
@@ -82,7 +81,7 @@ fun CalendarioMes(mes: YearMonth = YearMonth.now(), diasOcupados: List<LocalDate
                                 .weight(1f)
                                 .padding(4.dp)
                                 .clip(RoundedCornerShape(4.dp))
-                                .border(BorderStroke(1.dp, grisC), RoundedCornerShape(4.dp))
+                                .border(BorderStroke(1.dp, Color.LightGray), RoundedCornerShape(4.dp))
                                 .background(if (dia.esOcupado) naranjaMEP else Color.Transparent)
                                 .clickable { onDiaSeleccionado(dia.fecha) }
                         ) {
