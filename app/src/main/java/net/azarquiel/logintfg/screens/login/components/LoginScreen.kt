@@ -14,10 +14,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -25,6 +29,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -65,6 +70,7 @@ fun LoginContent(navController: NavController) {
 fun LoginScreen(onLogin: (String, String) -> Unit) {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -118,8 +124,14 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
                     contentDescription = "Email"
                 )
             },
+            trailingIcon = {
+                val image = if (passwordVisibility) Icons.Default.Clear else Icons.Default.Done
+                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                    Icon(imageVector = image, contentDescription = "Mostrar/Ocultar contraseña")
+                }
+            },
             label = { Text("Contraseña") },
-            visualTransformation = if (password.isNotEmpty()) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled = false),
 
             colors = TextFieldDefaults.colors(
