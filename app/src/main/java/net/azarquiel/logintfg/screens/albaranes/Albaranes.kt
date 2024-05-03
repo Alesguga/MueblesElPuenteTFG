@@ -2,6 +2,7 @@ package net.azarquiel.logintfg.screens.albaranes
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -12,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import net.azarquiel.logintfg.screens.albaranes.components.CalendarioMes
+import net.azarquiel.logintfg.screens.albaranes.components.CardAlbaranes
 import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import java.time.LocalDate
@@ -22,8 +24,11 @@ import java.time.YearMonth
 @Composable
 fun Albaranes() {
     MueblesElPuenteAppTFGTheme {
-        NavPill(screenName = "Albaranes de envío")
-        AlbaranesContent()
+        Column {
+            NavPill(screenName = "Albaranes de envío")
+            AlbaranesContent()
+            CardAlbaranes()
+        }
     }
 }
 

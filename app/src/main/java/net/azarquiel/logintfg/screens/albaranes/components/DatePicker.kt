@@ -9,8 +9,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
-import net.azarquiel.logintfg.ui.theme.grisCC
 import net.azarquiel.logintfg.ui.theme.grisO
 import net.azarquiel.logintfg.ui.theme.naranjaMEP
 import java.time.LocalDate
@@ -42,7 +41,7 @@ fun CalendarioMes(mes:YearMonth,diasOcupados: List<LocalDate> = listOf(LocalDate
         DiaCalendario(fecha, diasOcupados.contains(fecha))
     }
     Column(modifier = Modifier
-        .padding(8.dp ,80.dp, 8.dp, 8.dp)
+        .padding(10.dp, 10.dp, 10.dp, 8.dp)
         .clip(RoundedCornerShape(10.dp))
         .background(grisC)
     ) {
@@ -54,7 +53,7 @@ fun CalendarioMes(mes:YearMonth,diasOcupados: List<LocalDate> = listOf(LocalDate
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = { mes = mes.minusMonths(1) }) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Mes anterior")
+                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Mes anterior", tint = grisO)
             }
             Text(
                 text = "${mes.month.getDisplayName(TextStyle.FULL, Locale.getDefault())} ${mes.year}",
@@ -63,7 +62,7 @@ fun CalendarioMes(mes:YearMonth,diasOcupados: List<LocalDate> = listOf(LocalDate
                 color = grisO
             )
             IconButton(onClick = { mes = mes.plusMonths(1) }) {
-                Icon(imageVector = Icons.Default.ArrowForward, contentDescription = "Mes siguiente")
+                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Mes siguiente", tint = grisO)
             }
         }
 
@@ -83,15 +82,18 @@ fun CalendarioMes(mes:YearMonth,diasOcupados: List<LocalDate> = listOf(LocalDate
             // Filas del calendario
             val semanas = diasConEstado.chunked(7)
             semanas.forEach { semana ->
-                Row(modifier = Modifier.fillMaxWidth()) {
+                Row(modifier = Modifier.fillMaxWidth().padding(1.dp)) {
                     semana.forEach { dia ->
                         Box(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(4.dp)
+                                .padding(5.dp)
                                 .clip(RoundedCornerShape(4.dp))
-                                .border(BorderStroke(1.dp, Color.LightGray), RoundedCornerShape(4.dp))
+                                .border(
+                                    BorderStroke(1.dp, Color.LightGray),
+                                    RoundedCornerShape(4.dp)
+                                )
                                 .background(if (dia.esOcupado) naranjaMEP else Color.Transparent)
                                 .clickable { onDiaSeleccionado(dia.fecha) }
                         ) {
@@ -103,19 +105,19 @@ fun CalendarioMes(mes:YearMonth,diasOcupados: List<LocalDate> = listOf(LocalDate
                                 textAlign = TextAlign.Center,
                                 color = if (dia.esOcupado) grisO else Color.White
                             )
-                            Spacer(modifier = Modifier.padding(20.dp))
+                            Spacer(modifier = Modifier.padding(21.dp))
                         }
                     }
                 }
             }
             Spacer(modifier = Modifier.padding(4.dp))
-
         }
+
     }
 
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-@Preview (showBackground = true)
+@Preview (showBackground = false)
 @Composable
 fun PreviewDatePicker() {
     MueblesElPuenteAppTFGTheme {
