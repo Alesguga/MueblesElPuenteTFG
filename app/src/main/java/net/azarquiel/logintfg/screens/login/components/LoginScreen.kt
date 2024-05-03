@@ -33,6 +33,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -77,8 +78,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(grisCC)
-            .padding(55.dp),
+            .background(grisCC),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     )
@@ -94,6 +94,8 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             value = email,
             onValueChange = { email = it },
             label = { Text("Mail de empresa") },
+            modifier = Modifier
+                .shadow(9.dp, shape = RoundedCornerShape(10.dp)),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.AccountBox,
@@ -120,6 +122,8 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
         TextField(
             value = password,
             onValueChange = { password = it },
+            modifier = Modifier
+                .shadow(9.dp, shape = RoundedCornerShape(10.dp)),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
@@ -156,6 +160,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
 
             modifier = Modifier
                 .width(250.dp)
+                .shadow(12.dp,shape = RoundedCornerShape(10.dp))
                 .height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = (grisO),
