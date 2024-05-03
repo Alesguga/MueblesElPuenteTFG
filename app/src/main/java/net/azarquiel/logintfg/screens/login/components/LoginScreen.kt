@@ -52,7 +52,10 @@ import net.azarquiel.logintfg.ui.theme.naranjaMEP
 fun MueblesElPuenteAppTFGTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         typography = AppTypography,
-        content = content
+        content = content,
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primaryContainer = grisCC
+        )
     )
 }
 

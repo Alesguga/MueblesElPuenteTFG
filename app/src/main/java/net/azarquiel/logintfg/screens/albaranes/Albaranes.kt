@@ -9,7 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import net.azarquiel.logintfg.screens.albaranes.components.CalendarioMes
@@ -22,19 +24,19 @@ import java.time.YearMonth
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
-fun Albaranes() {
+fun Albaranes(navController: NavController) {
     MueblesElPuenteAppTFGTheme {
         Column {
             NavPill(screenName = "Albaranes de envío")
-            AlbaranesContent()
-            CardAlbaranes()
+            AlbaranesContent(navController)
+            CardAlbaranes(navController)
         }
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
-fun AlbaranesContent() {
+fun AlbaranesContent(navController: NavController) {
     val db = Firebase.firestore
     val fechaSeleccionada by remember { mutableStateOf(LocalDate.now()) }
     val diasOcupados = remember { mutableStateListOf<LocalDate>() }
@@ -74,6 +76,6 @@ fun AlbaranesContent() {
 @Composable
 fun PreviewAlbaranes() {
     MueblesElPuenteAppTFGTheme {
-        Albaranes()
+        Albaranes(navController = NavController(LocalContext.current))
     }
 }
