@@ -95,7 +95,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             onValueChange = { email = it },
             label = { Text("Mail de empresa") },
             modifier = Modifier
-                .shadow(9.dp, shape = RoundedCornerShape(10.dp)),
+                .shadow(7.dp, shape = RoundedCornerShape(10.dp)),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.AccountBox,
@@ -123,7 +123,7 @@ fun LoginScreen(onLogin: (String, String) -> Unit) {
             value = password,
             onValueChange = { password = it },
             modifier = Modifier
-                .shadow(9.dp, shape = RoundedCornerShape(10.dp)),
+                .shadow(7.dp, shape = RoundedCornerShape(10.dp)),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,

@@ -20,6 +20,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
@@ -33,6 +34,7 @@ fun Card1(navController: NavController){
         modifier = Modifier
             .padding(8.dp)
             .clickable { navController.navigate("albaranes") }
+            .shadow(10.dp, RoundedCornerShape(15.dp))
             .fillMaxWidth(),
 
         shape = RoundedCornerShape(15.dp),
@@ -74,7 +76,7 @@ fun Card1(navController: NavController){
     }
 }
 
-@Preview(showBackground = false)
+@Preview(showBackground = true)
 @Composable
 fun PreviewCard1(){
     MueblesElPuenteAppTFGTheme {
