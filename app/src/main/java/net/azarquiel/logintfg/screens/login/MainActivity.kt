@@ -13,7 +13,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import net.azarquiel.logintfg.navigation.AppNavigation
-import net.azarquiel.logintfg.screens.login.components.LoginContent
 import net.azarquiel.logintfg.screens.login.components.LoginScreen
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 
