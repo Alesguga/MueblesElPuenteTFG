@@ -41,7 +41,7 @@ fun HomeContent(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(18.dp))
         Card1(navController)
-        Card2()
+        Card2(navController)
 
     }
 }

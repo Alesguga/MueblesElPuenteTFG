@@ -17,21 +17,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisCC
 
 @Composable
-fun Card2(){
+fun Card2(navController: NavController){
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .clickable { }
+            .clickable { navController.navigate("folder") }
             .shadow(10.dp, RoundedCornerShape(15.dp))
             .fillMaxWidth(),
 
@@ -79,6 +81,6 @@ fun Card2(){
 @Composable
 fun PreviewCard2(){
     MueblesElPuenteAppTFGTheme {
-        Card2()
+        Card2(navController = NavController(context = LocalContext.current))
     }
 }
