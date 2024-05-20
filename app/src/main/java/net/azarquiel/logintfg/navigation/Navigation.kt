@@ -36,12 +36,14 @@ fun AppNavigation() {
             route = "factura/{facturaId}",
             arguments = listOf(navArgument("facturaId") { type = NavType.StringType })
         ) { backStackEntry ->
-            val facturaId = backStackEntry.arguments?.getString("facturaId") ?: return@composable
+            val facturaId = backStackEntry.arguments?.getString("facturaId")
             factura(facturaId)
+        }
+        composable("factura") {
+            factura(null)
         }
         composable("folder") {
             FolderScreen(navController)
         }
     }
 }
-

@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import com.google.firebase.database.*
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
+
 @Composable
 fun Facturas(navController: NavController){
     MueblesElPuenteAppTFGTheme {
@@ -61,9 +62,7 @@ fun FacturasScreen(navController: NavController) {
                 }
                 facturas = nuevasFacturas
             }
-
             override fun onCancelled(error: DatabaseError) {
-                // Manejar error de base de datos
             }
         }
         facturasRef.addValueEventListener(facturasListener)
@@ -73,14 +72,30 @@ fun FacturasScreen(navController: NavController) {
         }
     }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        items(facturas) { factura ->
-            FacturaCard(factura = factura) {
-                navController.navigate("factura/${factura.id}")
+    Column(modifier = Modifier.fillMaxSize()) {
+        Button(
+            onClick = { navController.navigate("factura") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .shadow(5.dp, RoundedCornerShape(10.dp)),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.White
+            ),
+            shape = RoundedCornerShape(10.dp)
+        ) {
+            Text(text = "Crear Nueva Factura", style = MaterialTheme.typography.bodyLarge, color = Color.Black)
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(facturas) { factura ->
+                FacturaCard(factura = factura) {
+                    navController.navigate("factura/${factura.id}")
+                }
             }
         }
     }

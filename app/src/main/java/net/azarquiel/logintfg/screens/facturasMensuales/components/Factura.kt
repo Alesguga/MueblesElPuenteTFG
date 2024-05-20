@@ -50,7 +50,7 @@ fun CustomTextField(
 }
 
 @Composable
-fun factura(facturaId: String) {
+fun factura(facturaId: String?) {
     var calle by remember { mutableStateOf("") }
     var codigoP by remember { mutableStateOf("") }
     var cuerpo by remember { mutableStateOf("") }
@@ -66,25 +66,31 @@ fun factura(facturaId: String) {
     var total by remember { mutableStateOf("") }
 
     val database = FirebaseDatabase.getInstance("https://loginmep-c4c56-default-rtdb.europe-west1.firebasedatabase.app/")
-    val facturasRef = database.getReference("facturas").child(facturaId)
+    val facturasRef = if (facturaId != null) {
+        database.getReference("facturas").child(facturaId)
+    } else {
+        database.getReference("facturas").push()
+    }
 
     LaunchedEffect(facturaId) {
-        facturasRef.get().addOnSuccessListener { snapshot ->
-            val factura = snapshot.getValue(FacturaFB::class.java)
-            if (factura != null) {
-                calle = factura.calle
-                codigoP = factura.codigoP
-                cuerpo = factura.cuerpo
-                dni = factura.dni
-                fecha = factura.fecha
-                localidad = factura.localidad
-                nombreCompleto = factura.nombreCompleto
-                numero = factura.numero
-                piso = factura.piso
-                portal = factura.portal
-                precio = factura.precio
-                telefono = factura.telefono
-                total = factura.total
+        facturaId?.let {
+            facturasRef.get().addOnSuccessListener { snapshot ->
+                val factura = snapshot.getValue(FacturaFB::class.java)
+                if (factura != null) {
+                    calle = factura.calle
+                    codigoP = factura.codigoP
+                    cuerpo = factura.cuerpo
+                    dni = factura.dni
+                    fecha = factura.fecha
+                    localidad = factura.localidad
+                    nombreCompleto = factura.nombreCompleto
+                    numero = factura.numero
+                    piso = factura.piso
+                    portal = factura.portal
+                    precio = factura.precio
+                    telefono = factura.telefono
+                    total = factura.total
+                }
             }
         }
     }
@@ -128,7 +134,7 @@ fun factura(facturaId: String) {
 
         Button(onClick = {
             val factura = FacturaFB(
-                id = facturaId,
+                id = facturaId ?: facturasRef.key ?: "",
                 calle = calle,
                 codigoP = codigoP,
                 cuerpo = cuerpo,
