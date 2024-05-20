@@ -10,7 +10,7 @@ import net.azarquiel.logintfg.screens.albaranes.Albaranes
 import net.azarquiel.logintfg.screens.facturasMensuales.Facturas
 import net.azarquiel.logintfg.screens.home.HomeScreen
 import net.azarquiel.logintfg.screens.login.components.LoginContent
-import net.azarquiel.logintfg.screens.muebles.FolderScreen
+import net.azarquiel.logintfg.screens.muebles.folderscreen.FolderScreen
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable

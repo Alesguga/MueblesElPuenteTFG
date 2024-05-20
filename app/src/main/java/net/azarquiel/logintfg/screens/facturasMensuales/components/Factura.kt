@@ -1,7 +1,8 @@
-
 package net.azarquiel.logintfg.screens.facturasMensuales.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -9,19 +10,47 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.database.FirebaseDatabase
 import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
+import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.naranjaMEP
-import java.time.LocalDate
 
 @Composable
-fun factura(){
+fun CustomTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        modifier = modifier
+            .fillMaxWidth()
+            .shadow(7.dp, RoundedCornerShape(10.dp)),
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = Color.White,
+            focusedContainerColor = Color.White,
+            unfocusedTextColor = Color.Black,
+            focusedTextColor = Color.Black,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedLabelColor = naranjaMEP,
+            focusedLeadingIconColor = naranjaMEP,
+            focusedPlaceholderColor = naranjaMEP,
+            cursorColor = naranjaMEP
+        ),
+        shape = RoundedCornerShape(10.dp),
+        keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled = false)
+    )
+}
+
+@Composable
+fun factura() {
     var calle by remember { mutableStateOf("") }
     var codigoP by remember { mutableStateOf("") }
     var cuerpo by remember { mutableStateOf("") }
@@ -35,302 +64,81 @@ fun factura(){
     var precio by remember { mutableStateOf("") }
     var telefono by remember { mutableStateOf("") }
     var total by remember { mutableStateOf("") }
-    NavPill("Factura")
-    Column(modifier = Modifier.padding(10.dp,80.dp,8.dp,10.dp)) {
-        TextField(
-            value = fecha,
-            onValueChange = { fecha = it },
-            label = { Text("Fecha") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
 
-        )
+    val database = FirebaseDatabase.getInstance("https://loginmep-c4c56-default-rtdb.europe-west1.firebasedatabase.app/")
+    val facturasRef = database.getReference("facturas")
+
+    Column(
+        modifier = Modifier
+            .padding(10.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        NavPill("Factura")
+        CustomTextField(value = fecha, onValueChange = { fecha = it }, label = "Fecha")
         Spacer(modifier = Modifier.height(8.dp))
         Row {
-            TextField(
-                value = nombreCompleto,
-                onValueChange = { nombreCompleto = it },
-                label = { Text("Nombre Completo")},
-                modifier = Modifier
-                    .shadow(7.dp, RoundedCornerShape(10.dp)),
-                colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = Color.White,
-                    focusedContainerColor = Color.White,
-                    unfocusedTextColor = Color.Black,
-                    focusedTextColor = Color.Black,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    focusedLabelColor = naranjaMEP,
-                    focusedLeadingIconColor = naranjaMEP,
-                    focusedPlaceholderColor = naranjaMEP,
-                    cursorColor = naranjaMEP
-                ),
-                shape = RoundedCornerShape(10.dp),
-                keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-
-            )
+            CustomTextField(value = nombreCompleto, onValueChange = { nombreCompleto = it }, label = "Nombre Completo", modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.width(8.dp))
-            TextField(
-                value = dni,
-                onValueChange = { dni = it },
-                label = { Text("DNI") },
-                modifier = Modifier
-                    .shadow(7.dp, RoundedCornerShape(10.dp)),
-                colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = Color.White,
-                    focusedContainerColor = Color.White,
-                    unfocusedTextColor = Color.Black,
-                    focusedTextColor = Color.Black,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    focusedLabelColor = naranjaMEP,
-                    focusedLeadingIconColor = naranjaMEP,
-                    focusedPlaceholderColor = naranjaMEP,
-                    cursorColor = naranjaMEP
-                ),
-                shape = RoundedCornerShape(10.dp),
-                keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-            )
+            CustomTextField(value = dni, onValueChange = { dni = it }, label = "DNI", modifier = Modifier.weight(1f))
         }
         Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = calle, 
-            onValueChange = { calle = it },
-            label = { Text("Calle") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
+        CustomTextField(value = calle, onValueChange = { calle = it }, label = "Calle")
         Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = codigoP, 
-            onValueChange = { codigoP = it },
-            label = { Text("Código Postal") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
+        CustomTextField(value = codigoP, onValueChange = { codigoP = it }, label = "Código Postal")
         Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = cuerpo, 
-            onValueChange = { cuerpo = it },
-            label = { Text("Cuerpo") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
+        CustomTextField(value = cuerpo, onValueChange = { cuerpo = it }, label = "Cuerpo")
         Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = localidad, onValueChange = { localidad = it }, label = "Localidad")
+        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = numero, onValueChange = { numero = it }, label = "Número")
+        Spacer(modifier = Modifier.height(8.dp))
+        Row {
+            CustomTextField(value = piso, onValueChange = { piso = it }, label = "Piso", modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.width(8.dp))
+            CustomTextField(value = portal, onValueChange = { portal = it }, label = "Portal", modifier = Modifier.weight(1f))
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = precio, onValueChange = { precio = it }, label = "Precio")
+        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = telefono, onValueChange = { telefono = it }, label = "Teléfono")
+        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = total, onValueChange = { total = it }, label = "Total")
+        Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
-            value = localidad, 
-            onValueChange = { localidad = it },
-            label = { Text("Localidad") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
+        Button(onClick = {
+            val factura = FacturaFB(
+                calle = calle,
+                codigoP = codigoP,
+                cuerpo = cuerpo,
+                dni = dni,
+                fecha = fecha,
+                localidad = localidad,
+                nombreCompleto = nombreCompleto,
+                numero = numero,
+                piso = piso,
+                portal = portal,
+                precio = precio,
+                telefono = telefono,
+                total = total
+            )
+            val facturaId = facturasRef.push().key ?: ""
+            facturasRef.child(facturaId).setValue(factura)
+        }, modifier = Modifier
+            .fillMaxWidth()
+            .shadow(12.dp, shape = RoundedCornerShape(10.dp))
+            .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = (grisC),
+                disabledContainerColor = Color.White
             ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-
-        TextField(
-            value = numero, 
-            onValueChange = { numero = it },
-            label = { Text("Número") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = piso, 
-            onValueChange = { piso = it },
-            label = { Text("Piso") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = portal, 
-            onValueChange = { portal = it },
-            label = { Text("Portal") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = precio, 
-            onValueChange = { precio = it },
-            label = { Text("Precio") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = telefono, 
-            onValueChange = { telefono = it },
-            label = { Text("Teléfono") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        TextField(
-            value = total, 
-            onValueChange = { total = it },
-            label = { Text("Total") },
-            modifier = Modifier
-                .shadow(7.dp, RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color.White,
-                focusedContainerColor = Color.White,
-                unfocusedTextColor = Color.Black,
-                focusedTextColor = Color.Black,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedLabelColor = naranjaMEP,
-                focusedLeadingIconColor = naranjaMEP,
-                focusedPlaceholderColor = naranjaMEP,
-                cursorColor = naranjaMEP
-            ),
-            shape = RoundedCornerShape(10.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled  = false)
-        )
+            shape = RoundedCornerShape(10.dp)
+            ){
+            Text("Enviar")
+        }
     }
 }
-@Preview (showBackground = true)
+
+@Preview(showBackground = true)
 @Composable
 fun PreviewFacturaForm() {
     MueblesElPuenteAppTFGTheme {

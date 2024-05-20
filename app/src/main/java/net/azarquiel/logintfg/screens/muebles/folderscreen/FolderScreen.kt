@@ -1,4 +1,4 @@
-package net.azarquiel.logintfg.screens.muebles
+package net.azarquiel.logintfg.screens.muebles.folderscreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -56,8 +56,8 @@ fun FolderList(folders: List<String>) {
 @Composable
 fun FolderCard(folderUrl: String) {
     Card(
-        shape = RoundedCornerShape(8.dp),
-        elevation = 4.dp,
+        shape = RoundedCornerShape(5.dp),
+        elevation = 1.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)

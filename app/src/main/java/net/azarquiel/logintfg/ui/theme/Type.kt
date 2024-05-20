@@ -12,8 +12,6 @@ import net.azarquiel.logintfg.R
 val CustomFontFamily = FontFamily(
     Font(R.font.mepfont, FontWeight.Normal)
 )
-
-
 // Set of Material typography styles to start with
 val AppTypography = Typography(
     bodyLarge = TextStyle(

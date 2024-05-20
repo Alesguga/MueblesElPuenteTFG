@@ -77,6 +77,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     //Firebase Storage
     implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+    //Firebase Realtime Database
+    implementation("com.google.firebase:firebase-database-ktx:21.0.0")
     //Splash Api
     implementation ("androidx.core:core-splashscreen:1.0.1")
     //Navigation Compose
