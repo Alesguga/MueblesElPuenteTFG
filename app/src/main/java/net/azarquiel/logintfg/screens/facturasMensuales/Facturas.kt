@@ -12,22 +12,24 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.firebase.database.*
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 @Composable
-fun Facturas(){
+fun Facturas(navController: NavController){
     MueblesElPuenteAppTFGTheme {
-        FacturasScreen()
+        FacturasScreen(navController)
     }
 }
+
 @Composable
-fun FacturaCard(factura: FacturaFB) {
+fun FacturaCard(factura: FacturaFB, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable {  }
+            .clickable(onClick = onClick)
             .shadow(5.dp, RoundedCornerShape(10.dp)),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -42,34 +44,34 @@ fun FacturaCard(factura: FacturaFB) {
 }
 
 @Composable
-fun FacturasScreen() {
+fun FacturasScreen(navController: NavController) {
     val database = FirebaseDatabase.getInstance("https://loginmep-c4c56-default-rtdb.europe-west1.firebasedatabase.app/")
     val facturasRef = database.getReference("facturas")
     var facturas by remember { mutableStateOf<List<FacturaFB>>(emptyList()) }
 
     DisposableEffect(Unit) {
-    val facturasListener = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            val nuevasFacturas = mutableListOf<FacturaFB>()
-            snapshot.children.forEach {
-                val factura = it.getValue(FacturaFB::class.java)
-                if (factura != null) {
-                    nuevasFacturas.add(factura)
+        val facturasListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val nuevasFacturas = mutableListOf<FacturaFB>()
+                snapshot.children.forEach {
+                    val factura = it.getValue(FacturaFB::class.java)?.copy(id = it.key ?: "")
+                    if (factura != null) {
+                        nuevasFacturas.add(factura)
+                    }
                 }
+                facturas = nuevasFacturas
             }
-            facturas = nuevasFacturas
-        }
 
-        override fun onCancelled(error: DatabaseError) {
-            // Manejar error de base de datos
+            override fun onCancelled(error: DatabaseError) {
+                // Manejar error de base de datos
+            }
+        }
+        facturasRef.addValueEventListener(facturasListener)
+
+        onDispose {
+            facturasRef.removeEventListener(facturasListener)
         }
     }
-    facturasRef.addValueEventListener(facturasListener)
-
-    onDispose {
-        facturasRef.removeEventListener(facturasListener)
-    }
-}
 
     LazyColumn(
         modifier = Modifier
@@ -77,7 +79,9 @@ fun FacturasScreen() {
             .padding(16.dp)
     ) {
         items(facturas) { factura ->
-            FacturaCard(factura = factura)
+            FacturaCard(factura = factura) {
+                navController.navigate("factura/${factura.id}")
+            }
         }
     }
 }
@@ -86,6 +90,6 @@ fun FacturasScreen() {
 @Composable
 fun PreviewFacturasScreen() {
     MueblesElPuenteAppTFGTheme {
-        FacturasScreen()
+        // FacturasScreen() // No podemos previsualizar porque no tenemos NavController aquí
     }
 }

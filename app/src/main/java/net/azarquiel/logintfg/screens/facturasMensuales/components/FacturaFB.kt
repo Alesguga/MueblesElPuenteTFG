@@ -1,6 +1,7 @@
 package net.azarquiel.logintfg.screens.facturasMensuales.components
 
 data class FacturaFB(
+    val id: String = "",
     val calle: String = "",
     val codigoP: String = "",
     val cuerpo: String = "",

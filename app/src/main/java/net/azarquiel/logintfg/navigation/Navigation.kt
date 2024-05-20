@@ -3,9 +3,11 @@ package net.azarquiel.logintfg.navigation
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import net.azarquiel.logintfg.screens.albaranes.Albaranes
 import net.azarquiel.logintfg.screens.facturasMensuales.Facturas
 import net.azarquiel.logintfg.screens.facturasMensuales.components.factura
@@ -28,10 +30,14 @@ fun AppNavigation() {
             Albaranes(navController)
         }
         composable("facturas"){
-            Facturas()
+            Facturas(navController)
         }
-        composable("factura") {
-            factura()
+        composable(
+            route = "factura/{facturaId}",
+            arguments = listOf(navArgument("facturaId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val facturaId = backStackEntry.arguments?.getString("facturaId") ?: return@composable
+            factura(facturaId)
         }
         composable("folder") {
             FolderScreen(navController)

@@ -50,7 +50,7 @@ fun CustomTextField(
 }
 
 @Composable
-fun factura() {
+fun factura(facturaId: String) {
     var calle by remember { mutableStateOf("") }
     var codigoP by remember { mutableStateOf("") }
     var cuerpo by remember { mutableStateOf("") }
@@ -66,7 +66,28 @@ fun factura() {
     var total by remember { mutableStateOf("") }
 
     val database = FirebaseDatabase.getInstance("https://loginmep-c4c56-default-rtdb.europe-west1.firebasedatabase.app/")
-    val facturasRef = database.getReference("facturas")
+    val facturasRef = database.getReference("facturas").child(facturaId)
+
+    LaunchedEffect(facturaId) {
+        facturasRef.get().addOnSuccessListener { snapshot ->
+            val factura = snapshot.getValue(FacturaFB::class.java)
+            if (factura != null) {
+                calle = factura.calle
+                codigoP = factura.codigoP
+                cuerpo = factura.cuerpo
+                dni = factura.dni
+                fecha = factura.fecha
+                localidad = factura.localidad
+                nombreCompleto = factura.nombreCompleto
+                numero = factura.numero
+                piso = factura.piso
+                portal = factura.portal
+                precio = factura.precio
+                telefono = factura.telefono
+                total = factura.total
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -107,6 +128,7 @@ fun factura() {
 
         Button(onClick = {
             val factura = FacturaFB(
+                id = facturaId,
                 calle = calle,
                 codigoP = codigoP,
                 cuerpo = cuerpo,
@@ -121,18 +143,17 @@ fun factura() {
                 telefono = telefono,
                 total = total
             )
-            val facturaId = facturasRef.push().key ?: ""
-            facturasRef.child(facturaId).setValue(factura)
+            facturasRef.setValue(factura)
         }, modifier = Modifier
             .fillMaxWidth()
             .shadow(12.dp, shape = RoundedCornerShape(10.dp))
             .height(50.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = (grisC),
+                containerColor = grisC,
                 disabledContainerColor = Color.White
             ),
             shape = RoundedCornerShape(10.dp)
-            ){
+        ) {
             Text("Enviar")
         }
     }
@@ -142,6 +163,6 @@ fun factura() {
 @Composable
 fun PreviewFacturaForm() {
     MueblesElPuenteAppTFGTheme {
-        factura()
+        factura(facturaId = "sampleId")
     }
 }
