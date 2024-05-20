@@ -1,5 +1,6 @@
 package net.azarquiel.logintfg.screens.facturasMensuales
 
+import android.widget.Space
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,10 +11,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.firebase.database.*
+import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 
@@ -105,6 +108,6 @@ fun FacturasScreen(navController: NavController) {
 @Composable
 fun PreviewFacturasScreen() {
     MueblesElPuenteAppTFGTheme {
-        // FacturasScreen() // No podemos previsualizar porque no tenemos NavController aquí
+         FacturasScreen(NavController(context = LocalContext.current))
     }
 }
