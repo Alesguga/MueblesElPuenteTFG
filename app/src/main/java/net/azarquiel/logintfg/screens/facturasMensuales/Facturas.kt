@@ -19,6 +19,7 @@ import com.google.firebase.database.*
 import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
+import net.azarquiel.logintfg.ui.theme.grisC
 
 @Composable
 fun Facturas(navController: NavController){
@@ -32,13 +33,12 @@ fun FacturaCard(factura: FacturaFB, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable(onClick = onClick)
-            .shadow(5.dp, RoundedCornerShape(10.dp)),
+            .padding(10.dp)
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = grisC
         ),
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(8.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = "Fecha: ${factura.fecha}", style = MaterialTheme.typography.bodyLarge)
@@ -81,9 +81,9 @@ fun FacturasScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .shadow(5.dp, RoundedCornerShape(10.dp)),
+                .shadow(0.dp, RoundedCornerShape(10.dp)),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White
+                containerColor = grisC
             ),
             shape = RoundedCornerShape(10.dp)
         ) {
