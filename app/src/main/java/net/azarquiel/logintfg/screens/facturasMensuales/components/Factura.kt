@@ -1,5 +1,6 @@
 package net.azarquiel.logintfg.screens.facturasMensuales.components
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.database.FirebaseDatabase
@@ -64,7 +66,7 @@ fun factura(facturaId: String?) {
     var precio by remember { mutableStateOf("") }
     var telefono by remember { mutableStateOf("") }
     var total by remember { mutableStateOf("") }
-
+    val context = LocalContext.current
     val database = FirebaseDatabase.getInstance("https://loginmep-c4c56-default-rtdb.europe-west1.firebasedatabase.app/")
     val facturasRef = if (facturaId != null) {
         database.getReference("facturas").child(facturaId)
@@ -133,23 +135,28 @@ fun factura(facturaId: String?) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
-            val factura = FacturaFB(
-                id = facturaId ?: facturasRef.key ?: "",
-                calle = calle,
-                codigoP = codigoP,
-                cuerpo = cuerpo,
-                dni = dni,
-                fecha = fecha,
-                localidad = localidad,
-                nombreCompleto = nombreCompleto,
-                numero = numero,
-                piso = piso,
-                portal = portal,
-                precio = precio,
-                telefono = telefono,
-                total = total
-            )
-            facturasRef.setValue(factura)
+            if (calle.isBlank() || codigoP.isBlank() || cuerpo.isBlank() || dni.isBlank() || fecha.isBlank() || localidad.isBlank() || nombreCompleto.isBlank() || numero.isBlank() || piso.isBlank() || portal.isBlank() || precio.isBlank() || telefono.isBlank() || total.isBlank()) {
+                Toast.makeText(context, "Todos los campos son obligatorios!", Toast.LENGTH_SHORT).show()
+            } else {
+                val factura = FacturaFB(
+                    id = facturaId ?: facturasRef.key ?: "",
+                    calle = calle,
+                    codigoP = codigoP,
+                    cuerpo = cuerpo,
+                    dni = dni,
+                    fecha = fecha,
+                    localidad = localidad,
+                    nombreCompleto = nombreCompleto,
+                    numero = numero,
+                    piso = piso,
+                    portal = portal,
+                    precio = precio,
+                    telefono = telefono,
+                    total = total
+                )
+                facturasRef.setValue(factura)
+                Toast.makeText(context, "Factura guardada con exito!", Toast.LENGTH_SHORT).show()
+            }
         }, modifier = Modifier
             .fillMaxWidth()
             .shadow(12.dp, shape = RoundedCornerShape(10.dp))
