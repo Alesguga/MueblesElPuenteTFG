@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.database.FirebaseDatabase
@@ -25,7 +27,9 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None
 ) {
     TextField(
         value = value,
@@ -33,7 +37,7 @@ fun CustomTextField(
         label = { Text(label) },
         modifier = modifier
             .fillMaxWidth()
-            .shadow(7.dp, RoundedCornerShape(10.dp)),
+            .shadow(3.dp, RoundedCornerShape(10.dp)),
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color.White,
             focusedContainerColor = Color.White,
@@ -47,7 +51,8 @@ fun CustomTextField(
             cursorColor = naranjaMEP
         ),
         shape = RoundedCornerShape(10.dp),
-        keyboardOptions = KeyboardOptions.Default.copy(autoCorrectEnabled = false)
+        keyboardOptions = keyboardOptions,
+        visualTransformation = visualTransformation
     )
 }
 
@@ -111,27 +116,32 @@ fun factura(facturaId: String?) {
             CustomTextField(value = dni, onValueChange = { dni = it }, label = "DNI", modifier = Modifier.weight(1f))
         }
         Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = calle, onValueChange = { calle = it }, label = "Calle")
-        Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = codigoP, onValueChange = { codigoP = it }, label = "Código Postal")
-        Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = cuerpo, onValueChange = { cuerpo = it }, label = "Cuerpo")
-        Spacer(modifier = Modifier.height(8.dp))
         CustomTextField(value = localidad, onValueChange = { localidad = it }, label = "Localidad")
         Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = numero, onValueChange = { numero = it }, label = "Número")
+        CustomTextField(value = calle, onValueChange = { calle = it }, label = "Calle")
         Spacer(modifier = Modifier.height(8.dp))
         Row {
+            CustomTextField(value = numero, onValueChange = { numero = it }, label = "Numero de calle", modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.width(5.dp))
+            CustomTextField(value = portal, onValueChange = { portal = it }, label = "Portal", modifier = Modifier.weight(1f),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+            Spacer(modifier = Modifier.width(5.dp))
             CustomTextField(value = piso, onValueChange = { piso = it }, label = "Piso", modifier = Modifier.weight(1f))
-            Spacer(modifier = Modifier.width(8.dp))
-            CustomTextField(value = portal, onValueChange = { portal = it }, label = "Portal", modifier = Modifier.weight(1f))
         }
         Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = precio, onValueChange = { precio = it }, label = "Precio")
+        CustomTextField(value = codigoP, onValueChange = { codigoP = it }, label = "Código Postal",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
         Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = telefono, onValueChange = { telefono = it }, label = "Teléfono")
+        CustomTextField(value = cuerpo, onValueChange = { cuerpo = it }, label = "Bulto")
         Spacer(modifier = Modifier.height(8.dp))
-        CustomTextField(value = total, onValueChange = { total = it }, label = "Total")
+        CustomTextField(value = telefono, onValueChange = { telefono = it }, label = "Teléfono",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = precio, onValueChange = { precio = it }, label = "Precio sin envío",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+        Spacer(modifier = Modifier.height(8.dp))
+        CustomTextField(value = total, onValueChange = { total = it }, label = "Total",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {

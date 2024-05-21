@@ -20,6 +20,7 @@ import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
+import net.azarquiel.logintfg.ui.theme.grisO
 
 @Composable
 fun Facturas(navController: NavController){
@@ -34,6 +35,7 @@ fun FacturaCard(factura: FacturaFB, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
+            .shadow(3.dp, RoundedCornerShape(10.dp))
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = grisC
@@ -41,8 +43,8 @@ fun FacturaCard(factura: FacturaFB, onClick: () -> Unit) {
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Fecha: ${factura.fecha}", style = MaterialTheme.typography.bodyLarge)
-            Text(text = "Nombre: ${factura.nombreCompleto}", style = MaterialTheme.typography.bodyLarge)
+            Text(text = "Fecha: ${factura.fecha}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
+            Text(text = "Nombre: ${factura.nombreCompleto}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
         }
     }
 }
@@ -83,11 +85,11 @@ fun FacturasScreen(navController: NavController) {
                 .padding(16.dp)
                 .shadow(0.dp, RoundedCornerShape(10.dp)),
             colors = ButtonDefaults.buttonColors(
-                containerColor = grisC
+                containerColor = grisO
             ),
             shape = RoundedCornerShape(10.dp)
         ) {
-            Text(text = "Crear Nueva Factura", style = MaterialTheme.typography.bodyLarge, color = Color.Black)
+            Text(text = "Crear Nueva Factura", style = MaterialTheme.typography.bodyLarge, color = Color.White)
         }
 
         LazyColumn(
