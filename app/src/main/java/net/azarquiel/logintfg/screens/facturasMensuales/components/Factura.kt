@@ -121,7 +121,7 @@ fun factura(facturaId: String?) {
         CustomTextField(value = calle, onValueChange = { calle = it }, label = "Calle")
         Spacer(modifier = Modifier.height(8.dp))
         Row {
-            CustomTextField(value = numero, onValueChange = { numero = it }, label = "Numero de calle", modifier = Modifier.weight(1f))
+            CustomTextField(value = numero, onValueChange = { numero = it }, label = "Nº calle", modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.width(5.dp))
             CustomTextField(value = portal, onValueChange = { portal = it }, label = "Portal", modifier = Modifier.weight(1f),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))

@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.firebase.database.*
 import net.azarquiel.logintfg.screens.commoncomponents.NavPill
@@ -89,9 +90,12 @@ fun FacturasScreen(navController: NavController) {
             ),
             shape = RoundedCornerShape(10.dp)
         ) {
-            Text(text = "Crear Nueva Factura", style = MaterialTheme.typography.bodyLarge, color = Color.White)
+            Text(
+                text = "Crear Nueva Factura",
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.White,fontSize = 18.sp
+            )
         }
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
