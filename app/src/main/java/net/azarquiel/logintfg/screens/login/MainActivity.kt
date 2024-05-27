@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import net.azarquiel.logintfg.navigation.AppNavigation
 import net.azarquiel.logintfg.screens.login.components.LoginScreen
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         installSplashScreen()
         setContent {
             MueblesElPuenteAppTFGTheme {

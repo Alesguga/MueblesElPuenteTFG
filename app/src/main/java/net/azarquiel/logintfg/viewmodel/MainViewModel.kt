@@ -4,36 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
-import net.azarquiel.logintfg.api.MainRepository
 
 class MainViewModel : ViewModel() {
-    private val repository: MainRepository = MainRepository()
+    private val storage = FirebaseStorage.getInstance()
+    private val storageRef = storage.reference.child("FotosWeb")
 
-    private val _folders = MutableStateFlow<List<String>>(emptyList())
-    val folders: StateFlow<List<String>> get() = _folders
-
-    fun loadFolders() {
+    fun getFolders(): LiveData<List<String>> {
+        val foldersLiveData = MutableLiveData<List<String>>()
         viewModelScope.launch {
-            _folders.value = repository.getFolders().filterNotNull()
+            storageRef.listAll()
+                .addOnSuccessListener { listResult ->
+                    val folders = listResult.prefixes.map { it.name }
+                    foldersLiveData.value = folders
+                }
+                .addOnFailureListener { exception ->
+                    println("Error sacando las carpetas: $exception")
+                }
         }
-    }
-
-    fun getFoldersByCategory(categoria: String): LiveData<List<String?>> {
-        val folders = MutableLiveData<List<String?>>()
-        viewModelScope.launch {
-            folders.value = repository.getFoldersByCategory(categoria)
-        }
-        return folders
-    }
-
-    fun getCategoriesByStyle(categoria: String, estilo: String): LiveData<List<String?>> {
-        val images = MutableLiveData<List<String?>>()
-        viewModelScope.launch {
-            images.value = repository.getCategoriesByStyle(categoria, estilo)
-        }
-        return images
+        return foldersLiveData
     }
 }

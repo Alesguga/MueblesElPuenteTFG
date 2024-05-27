@@ -67,6 +67,7 @@ dependencies {
     implementation("androidx.wear.compose:compose-material:1.3.1")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
     testImplementation("junit:junit:4.13.2")
     //Preview y tooling
     implementation ("androidx.compose.ui:ui-tooling-preview:1.6.7")
@@ -83,10 +84,6 @@ dependencies {
     implementation ("androidx.core:core-splashscreen:1.0.1")
     //Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.7")
-    // retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    //GSON
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     //Coil
     implementation ("io.coil-kt:coil-compose:2.4.0")
     //Picasso

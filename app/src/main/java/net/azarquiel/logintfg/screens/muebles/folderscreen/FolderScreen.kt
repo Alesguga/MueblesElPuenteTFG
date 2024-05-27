@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -16,7 +17,6 @@ import androidx.navigation.NavController
 import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.viewmodel.MainViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun FolderScreen(navController: NavController) {
@@ -28,11 +28,7 @@ fun FolderScreen(navController: NavController) {
 @Composable
 fun FolderContent(navController: NavController) {
     val viewModel: MainViewModel = viewModel()
-    val folders by viewModel.folders.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.loadFolders()
-    }
+    val folders by viewModel.getFolders().observeAsState(emptyList())
 
     Column {
         NavPill(screenName = "Muebles")
@@ -48,13 +44,13 @@ fun FolderList(folders: List<String>) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(folders.size) { index ->
-            FolderCard(folderUrl = folders[index])
+            FolderCard(folderName = folders[index])
         }
     }
 }
 
 @Composable
-fun FolderCard(folderUrl: String) {
+fun FolderCard(folderName: String) {
     Card(
         shape = RoundedCornerShape(5.dp),
         elevation = 1.dp,
@@ -68,7 +64,7 @@ fun FolderCard(folderUrl: String) {
                 .padding(16.dp)
         ) {
             Text(
-                text = folderUrl,
+                text = folderName,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
