@@ -14,6 +14,7 @@ import net.azarquiel.logintfg.screens.facturasMensuales.components.factura
 import net.azarquiel.logintfg.screens.home.HomeScreen
 import net.azarquiel.logintfg.screens.login.components.LoginContent
 import net.azarquiel.logintfg.screens.muebles.folderscreen.FolderScreen
+import net.azarquiel.logintfg.screens.muebles.mueblescreen.MuebleScreen
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
@@ -44,6 +45,14 @@ fun AppNavigation() {
         }
         composable("folder") {
             FolderScreen(navController)
+        }
+        composable(
+            route = "mueble/{folderName}",
+            arguments = listOf(navArgument("folderName") { type = NavType.StringType })
+        ){
+            backStackEntry ->
+            val folderName = backStackEntry.arguments?.getString("folderName")
+            MuebleScreen(navController,folderName)
         }
     }
 }

@@ -25,4 +25,20 @@ class MainViewModel : ViewModel() {
         }
         return foldersLiveData
     }
+
+    fun getFoldersByStyle(style: String): LiveData<List<String>> {
+        val subfoldersLiveData = MutableLiveData<List<String>>()
+        viewModelScope.launch {
+            val styleRef = storageRef.child(style)
+            styleRef.listAll()
+                .addOnSuccessListener { listResult ->
+                    val subfolders = listResult.prefixes.map { it.name }
+                    subfoldersLiveData.value = subfolders
+                }
+                .addOnFailureListener { exception ->
+                    println("Error sacando las subcarpetas: $exception")
+                }
+        }
+        return subfoldersLiveData
+    }
 }
