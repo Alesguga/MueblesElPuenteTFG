@@ -22,42 +22,10 @@ import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGThem
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.naranjaMEP
 
-@Composable
-fun CustomTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    modifier: Modifier = Modifier,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    visualTransformation: VisualTransformation = VisualTransformation.None
-) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        modifier = modifier
-            .fillMaxWidth()
-            .shadow(3.dp, RoundedCornerShape(10.dp)),
-        colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = Color.White,
-            focusedContainerColor = Color.White,
-            unfocusedTextColor = Color.Black,
-            focusedTextColor = Color.Black,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedLabelColor = naranjaMEP,
-            focusedLeadingIconColor = naranjaMEP,
-            focusedPlaceholderColor = naranjaMEP,
-            cursorColor = naranjaMEP
-        ),
-        shape = RoundedCornerShape(10.dp),
-        keyboardOptions = keyboardOptions,
-        visualTransformation = visualTransformation
-    )
-}
+
 
 @Composable
-fun factura(facturaId: String?) {
+fun Factura(facturaId: String?) {
     var calle by remember { mutableStateOf("") }
     var codigoP by remember { mutableStateOf("") }
     var cuerpo by remember { mutableStateOf("") }
@@ -186,6 +154,6 @@ fun factura(facturaId: String?) {
 @Composable
 fun PreviewFacturaForm() {
     MueblesElPuenteAppTFGTheme {
-        factura(facturaId = "sampleId")
+        Factura(facturaId = "sampleId")
     }
 }
