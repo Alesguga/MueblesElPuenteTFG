@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import net.azarquiel.logintfg.R
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
-import net.azarquiel.logintfg.ui.theme.grisO
 
 @Composable
 fun NavPill(screenName : String, modifier: Modifier = Modifier){
