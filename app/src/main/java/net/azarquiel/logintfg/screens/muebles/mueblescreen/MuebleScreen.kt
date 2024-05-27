@@ -1,6 +1,7 @@
 package net.azarquiel.logintfg.screens.muebles.mueblescreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -27,7 +29,7 @@ fun MuebleScreen(navController: NavController, folderName: String?) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(0.dp)
     ) {
         NavPill(screenName = "$folderName")
         LazyColumn(
@@ -35,20 +37,21 @@ fun MuebleScreen(navController: NavController, folderName: String?) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(subfolders.size) { index ->
-                SubfolderCard(subfolderName = subfolders[index])
+                SubfolderCard(navController, folderName = folderName ?: "", subfolderName = subfolders[index])
             }
         }
     }
 }
 
 @Composable
-fun SubfolderCard(subfolderName: String) {
+fun SubfolderCard(navController: NavController, folderName: String, subfolderName: String) {
     Card(
         shape = RoundedCornerShape(5.dp),
         elevation = 1.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)
+            .clickable { navController.navigate("image/$folderName/$subfolderName") }
     ) {
         Column(
             modifier = Modifier

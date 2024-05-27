@@ -41,4 +41,27 @@ class MainViewModel : ViewModel() {
         }
         return subfoldersLiveData
     }
+
+    fun getImagesByStyle(style: String): LiveData<List<String>> {
+        val imagesLiveData = MutableLiveData<List<String>>()
+        viewModelScope.launch {
+            val styleRef = storageRef.child(style)
+            styleRef.listAll()
+                .addOnSuccessListener { listResult ->
+                    val imageUrls = mutableListOf<String>()
+                    listResult.items.forEach { item ->
+                        item.downloadUrl.addOnSuccessListener { uri ->
+                            imageUrls.add(uri.toString())
+                            if (imageUrls.size == listResult.items.size) {
+                                imagesLiveData.value = imageUrls
+                            }
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    println("Error sacando las imágenes: $exception")
+                }
+        }
+        return imagesLiveData
+    }
 }
