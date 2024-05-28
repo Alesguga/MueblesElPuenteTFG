@@ -21,8 +21,8 @@ import net.azarquiel.logintfg.screens.commoncomponents.NavPill
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.naranjaMEP
-
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun Factura(facturaId: String?) {
@@ -113,27 +113,33 @@ fun Factura(facturaId: String?) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
-            if (calle.isBlank() || codigoP.isBlank() || cuerpo.isBlank() || dni.isBlank() || fecha.isBlank() || localidad.isBlank() || nombreCompleto.isBlank() || numero.isBlank() || piso.isBlank() || portal.isBlank() || precio.isBlank() || telefono.isBlank() || total.isBlank()) {
-                Toast.makeText(context, "Todos los campos son obligatorios!", Toast.LENGTH_SHORT).show()
-            } else {
-                val factura = FacturaFB(
-                    id = facturaId ?: facturasRef.key ?: "",
-                    calle = calle,
-                    codigoP = codigoP,
-                    cuerpo = cuerpo,
-                    dni = dni,
-                    fecha = fecha,
-                    localidad = localidad,
-                    nombreCompleto = nombreCompleto,
-                    numero = numero,
-                    piso = piso,
-                    portal = portal,
-                    precio = precio,
-                    telefono = telefono,
-                    total = total
-                )
-                facturasRef.setValue(factura)
-                Toast.makeText(context, "Factura guardada con exito!", Toast.LENGTH_SHORT).show()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            try {
+                dateFormat.parse(fecha)
+                if (calle.isBlank() || codigoP.isBlank() || cuerpo.isBlank() || dni.isBlank() || fecha.isBlank() || localidad.isBlank() || nombreCompleto.isBlank() || numero.isBlank() || piso.isBlank() || portal.isBlank() || precio.isBlank() || telefono.isBlank() || total.isBlank()) {
+                    Toast.makeText(context, "Todos los campos son obligatorios!", Toast.LENGTH_SHORT).show()
+                } else {
+                    val factura = FacturaFB(
+                        id = facturaId ?: facturasRef.key ?: "",
+                        calle = calle,
+                        codigoP = codigoP,
+                        cuerpo = cuerpo,
+                        dni = dni,
+                        fecha = fecha,
+                        localidad = localidad,
+                        nombreCompleto = nombreCompleto,
+                        numero = numero,
+                        piso = piso,
+                        portal = portal,
+                        precio = precio,
+                        telefono = telefono,
+                        total = total
+                    )
+                    facturasRef.setValue(factura)
+                    Toast.makeText(context, "Factura guardada con exito!", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Formato de fecha inválido. Utiliza dd/MM/yyyy.", Toast.LENGTH_SHORT).show()
             }
         }, modifier = Modifier
             .fillMaxWidth()

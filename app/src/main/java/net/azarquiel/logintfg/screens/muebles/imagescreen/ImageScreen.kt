@@ -16,25 +16,23 @@ import net.azarquiel.logintfg.viewmodel.MainViewModel
 @Composable
 fun ImageScreen(navController: NavController, folderName: String?, subfolderName: String?) {
     MueblesElPuenteAppTFGTheme {
-    val viewModel: MainViewModel = viewModel()
-    val images by viewModel.getImagesByStyle("$folderName/$subfolderName").observeAsState(emptyList())
+        val viewModel: MainViewModel = viewModel()
+        val images by viewModel.getImagesByStyle("$folderName/$subfolderName").observeAsState(emptyList())
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(0.dp)
-    ) {
-        NavPill(screenName = "$subfolderName")
-        LazyColumn(
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(0.dp)
         ) {
-            items(images.size) { index ->
-                ImageCard(imageUrl = images[index])
+            NavPill(screenName = "$subfolderName")
+            LazyColumn(
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(images.size) { index ->
+                    ImageCard(imageUrl = images[index], navController = navController)
+                }
             }
         }
     }
-    }
 }
-
-

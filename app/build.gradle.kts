@@ -68,6 +68,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
+    implementation("com.google.firebase:firebase-appcheck-playintegrity:18.0.0")
     testImplementation("junit:junit:4.13.2")
     //Preview y tooling
     implementation ("androidx.compose.ui:ui-tooling-preview:1.6.7")
@@ -88,6 +89,8 @@ dependencies {
     implementation ("io.coil-kt:coil-compose:2.4.0")
     //Picasso
     implementation ("com.squareup.picasso:picasso:2.71828")
+    //Glance
+    implementation ("androidx.glance:glance-appwidget:1.0.0")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

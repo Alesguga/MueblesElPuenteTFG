@@ -1,7 +1,6 @@
 package net.azarquiel.logintfg.screens.facturasMensuales
 
-import android.widget.Space
-import androidx.compose.foundation.clickable
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,11 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.firebase.database.*
-import net.azarquiel.logintfg.screens.commoncomponents.NavPill
+import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaCard
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
-import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisO
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun Facturas(navController: NavController){
@@ -31,27 +31,7 @@ fun Facturas(navController: NavController){
 }
 
 @Composable
-fun FacturaCard(factura: FacturaFB, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp)
-            .shadow(3.dp, RoundedCornerShape(10.dp))
-            .clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(
-            containerColor = grisC
-        ),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = "Fecha: ${factura.fecha}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
-            Text(text = "Nombre: ${factura.nombreCompleto}", style = MaterialTheme.typography.bodyLarge, color = Color.White)
-        }
-    }
-}
-
-@Composable
-fun FacturasScreen(navController: NavController) {
+fun FacturasScreen(navController: NavController, context: android.content.Context = LocalContext.current) {
     val database = FirebaseDatabase.getInstance("https://loginmep-c4c56-default-rtdb.europe-west1.firebasedatabase.app/")
     val facturasRef = database.getReference("facturas")
     var facturas by remember { mutableStateOf<List<FacturaFB>>(emptyList()) }
@@ -66,8 +46,10 @@ fun FacturasScreen(navController: NavController) {
                         nuevasFacturas.add(factura)
                     }
                 }
-                facturas = nuevasFacturas
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                facturas = nuevasFacturas.sortedBy { dateFormat.parse(it.fecha) }
             }
+
             override fun onCancelled(error: DatabaseError) {
             }
         }
@@ -93,7 +75,7 @@ fun FacturasScreen(navController: NavController) {
             Text(
                 text = "Crear Nueva Factura",
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.White,fontSize = 18.sp
+                color = Color.White, fontSize = 18.sp
             )
         }
         LazyColumn(
@@ -102,9 +84,23 @@ fun FacturasScreen(navController: NavController) {
                 .padding(16.dp)
         ) {
             items(facturas) { factura ->
-                FacturaCard(factura = factura) {
-                    navController.navigate("factura/${factura.id}")
-                }
+                FacturaCard(
+                    factura = factura,
+                    onClick = {
+                        navController.navigate("factura/${factura.id}")
+                    },
+                    onDeleteClick = {
+                        val facturasRef = database.getReference("facturas").child(factura.id)
+                        facturasRef.removeValue().addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                facturas = facturas.filter { it.id != factura.id }
+                                Toast.makeText(context, "Factura borrada con exito!", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(context, "Error al borrar la factura", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                )
             }
         }
     }
@@ -114,6 +110,6 @@ fun FacturasScreen(navController: NavController) {
 @Composable
 fun PreviewFacturasScreen() {
     MueblesElPuenteAppTFGTheme {
-         FacturasScreen(NavController(context = LocalContext.current))
+        FacturasScreen(NavController(context = LocalContext.current))
     }
 }
