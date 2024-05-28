@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import net.azarquiel.logintfg.screens.albaranes.Albaranes
 import net.azarquiel.logintfg.screens.facturasMensuales.Facturas
-import net.azarquiel.logintfg.screens.facturasMensuales.components.factura
+import net.azarquiel.logintfg.screens.facturasMensuales.components.Factura
 import net.azarquiel.logintfg.screens.home.HomeScreen
 import net.azarquiel.logintfg.screens.login.components.LoginContent
 import net.azarquiel.logintfg.screens.muebles.folderscreen.FolderScreen
@@ -39,10 +39,10 @@ fun AppNavigation() {
             arguments = listOf(navArgument("facturaId") { type = NavType.StringType })
         ) { backStackEntry ->
             val facturaId = backStackEntry.arguments?.getString("facturaId")
-            factura(facturaId)
+            Factura(facturaId)
         }
         composable("factura") {
-            factura(null)
+            Factura(null)
         }
         composable("folder") {
             FolderScreen(navController)
