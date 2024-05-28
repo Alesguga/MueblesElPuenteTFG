@@ -40,6 +40,7 @@ fun FolderCard(navController: NavController, folderName: String) {
                 ),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
+                    .padding(10.dp)
             )
         }
     }

@@ -20,7 +20,7 @@ import net.azarquiel.logintfg.ui.theme.grisC
 @Composable
 fun SubfolderCard(navController: NavController, folderName: String, subfolderName: String) {
     Card(
-        shape = RoundedCornerShape(5.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = 1.dp,
         modifier = Modifier
             .fillMaxWidth()
@@ -40,6 +40,7 @@ fun SubfolderCard(navController: NavController, folderName: String, subfolderNam
                 ),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
+                    .padding(10.dp)
             )
         }
     }
