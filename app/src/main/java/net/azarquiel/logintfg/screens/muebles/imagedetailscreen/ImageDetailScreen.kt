@@ -25,7 +25,6 @@ fun ImageDetailScreen(encodedImageUrl: String?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
             .padding(16.dp)
     ) {
         imageUrl?.let {

@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisO
+import net.azarquiel.logintfg.ui.theme.rojoP
 
 @Composable
 fun FacturaCard(factura: FacturaFB, onClick: () -> Unit, onDeleteClick: () -> Unit) {
@@ -38,7 +39,7 @@ fun FacturaCard(factura: FacturaFB, onClick: () -> Unit, onDeleteClick: () -> Un
                 Text(text = "Nombre: ${factura.nombreCompleto}", style = MaterialTheme.typography.bodyLarge, color = grisO)
             }
             IconButton(onClick = onDeleteClick) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete", tint = Color.Red)
+                Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete", tint = rojoP)
             }
         }
     }
