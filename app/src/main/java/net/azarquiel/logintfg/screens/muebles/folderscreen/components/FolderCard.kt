@@ -20,7 +20,7 @@ import net.azarquiel.logintfg.ui.theme.grisC
 @Composable
 fun FolderCard(navController: NavController, folderName: String) {
     Card(
-        shape = RoundedCornerShape(5.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = 1.dp,
         modifier = Modifier
             .fillMaxWidth()

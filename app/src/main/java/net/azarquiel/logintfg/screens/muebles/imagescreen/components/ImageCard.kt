@@ -22,7 +22,7 @@ import net.azarquiel.logintfg.ui.theme.grisC
 @Composable
 fun ImageCard(imageUrl: String, navController: NavController) {
     Card(
-        shape = RoundedCornerShape(5.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = 1.dp,
         modifier = Modifier
             .fillMaxWidth()

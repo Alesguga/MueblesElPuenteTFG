@@ -19,6 +19,7 @@ import com.google.firebase.database.*
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaCard
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
+import net.azarquiel.logintfg.ui.theme.grisC
 import net.azarquiel.logintfg.ui.theme.grisO
 import java.text.SimpleDateFormat
 import java.util.*
@@ -68,14 +69,15 @@ fun FacturasScreen(navController: NavController, context: android.content.Contex
                 .padding(16.dp)
                 .shadow(0.dp, RoundedCornerShape(10.dp)),
             colors = ButtonDefaults.buttonColors(
-                containerColor = grisO
+                containerColor = grisC,
             ),
             shape = RoundedCornerShape(10.dp)
         ) {
             Text(
                 text = "Crear Nueva Factura",
+                modifier = Modifier.padding(18.dp),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.White, fontSize = 18.sp
+                color = Color.White, fontSize = 21.sp
             )
         }
         LazyColumn(

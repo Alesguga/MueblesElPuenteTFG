@@ -31,7 +31,6 @@ fun CardAlbaranes(navController: NavController) {
     Card(
         modifier = Modifier
             .padding(10.dp)
-            .shadow(3.dp, RoundedCornerShape(10.dp))
             .clickable { navController.navigate("facturas") }
             .fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),

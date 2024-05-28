@@ -34,7 +34,6 @@ fun Card1(navController: NavController){
         modifier = Modifier
             .padding(8.dp)
             .clickable { navController.navigate("albaranes") }
-            .shadow(10.dp, RoundedCornerShape(15.dp))
             .fillMaxWidth(),
 
         shape = RoundedCornerShape(15.dp),
