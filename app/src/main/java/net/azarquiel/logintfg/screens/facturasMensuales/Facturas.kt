@@ -20,7 +20,6 @@ import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaCard
 import net.azarquiel.logintfg.screens.facturasMensuales.components.FacturaFB
 import net.azarquiel.logintfg.screens.login.components.MueblesElPuenteAppTFGTheme
 import net.azarquiel.logintfg.ui.theme.grisC
-import net.azarquiel.logintfg.ui.theme.grisO
 import java.text.SimpleDateFormat
 import java.util.*
 
